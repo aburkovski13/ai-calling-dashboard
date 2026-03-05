@@ -1,0 +1,55 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+/* Forest Green palette */
+$forest-green: mat.define-palette(
+    (
+        50: #e8f3ee,
+        100: #c6e0d3,
+        200: #a0ccba,
+        300: #7ab8a1,
+        400: #5ea98d,
+        500: #429a78,
+        600: #3c9270,
+        700: #338865,
+        800: #2b7e5b,
+        900: #1d6c48,
+        contrast: (
+            500: white,
+        ),
+    )
+);
+
+/* Sand / Gold palette */
+$sand: mat.define-palette(
+    (
+        50: #fbf6ea,
+        100: #f3e7c8,
+        200: #ead7a3,
+        300: #e0c77e,
+        400: #d9bb63,
+        500: #d2af47,
+        600: #cda842,
+        700: #c79f39,
+        800: #c19731,
+        900: #b68622,
+        contrast: (
+            500: #1f2937,
+        ),
+    )
+);
+
+$warn: mat.define-palette(mat.$red-palette);
+
+$theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $forest-green,
+            accent: $sand,
+            warn: $warn,
+        ),
+    )
+);
+
+@include mat.all-component-themes($theme);

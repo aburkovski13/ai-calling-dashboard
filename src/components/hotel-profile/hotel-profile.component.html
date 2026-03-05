@@ -1,0 +1,83 @@
+<mat-card class="card">
+    <div class="header">
+        <div class="title">
+            <mat-icon class="title__icon">hotel</mat-icon>
+            <div>
+                <div class="title__text">Hotel profile</div>
+                <div class="title__sub">Set up contact & location details for your Hotel</div>
+            </div>
+        </div>
+    </div>
+
+    <form class="grid" [formGroup]="form">
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Hotel name</mat-label>
+            <mat-icon matPrefix>apartment</mat-icon>
+            <input matInput formControlName="hotelName" placeholder="Hotel name..." />
+            <mat-error *ngIf="form.controls.hotelName.touched && form.controls.hotelName.invalid">
+                Please enter a hotel name
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Front desk phone number</mat-label>
+            <mat-icon matPrefix>call</mat-icon>
+            <input matInput formControlName="frontDeskPhone" placeholder="+48..." />
+            <mat-error
+                *ngIf="form.controls.frontDeskPhone.touched && form.controls.frontDeskPhone.invalid"
+            >
+                Phone is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Email</mat-label>
+            <mat-icon matPrefix>mail</mat-icon>
+            <input matInput formControlName="email" placeholder="frontdesk@hotel.com" />
+            <mat-error *ngIf="form.controls.email.touched && form.controls.email.invalid">
+                Enter a valid email
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field field--full">
+            <mat-label>Street and number</mat-label>
+            <mat-icon matPrefix>location_on</mat-icon>
+            <input matInput formControlName="address" placeholder="Krakowska 39" />
+            <mat-error *ngIf="form.controls.address.touched && form.controls.address.invalid">
+                Address is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Postal code</mat-label>
+            <mat-icon matPrefix>markunread_mailbox</mat-icon>
+            <input matInput formControlName="postalCode" placeholder="00-000" />
+            <mat-error *ngIf="form.controls.postalCode.touched && form.controls.postalCode.invalid">
+                Postal code is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>City</mat-label>
+            <mat-icon matPrefix>location_city</mat-icon>
+            <input matInput formControlName="city" placeholder="Wroclaw" />
+            <mat-error *ngIf="form.controls.city.touched && form.controls.city.invalid">
+                City is required
+            </mat-error>
+        </mat-form-field>
+    </form>
+
+    <div class="actions">
+        <button mat-stroked-button type="button" (click)="form.reset()">Reset</button>
+
+        <button
+            mat-flat-button
+            color="primary"
+            type="button"
+            [disabled]="form.invalid"
+            (click)="submitForm()"
+        >
+            Save hotel profile
+        </button>
+    </div>
+</mat-card>

@@ -1,0 +1,127 @@
+<mat-card class="card">
+    <div class="header">
+        <div class="header__icon">
+            <mat-icon>smart_toy</mat-icon>
+        </div>
+
+        <div class="header__text">
+            <div class="header__title">AI Assistant Call Configuration</div>
+            <div class="header__subtitle">Configure how the assistant speaks.</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Assistant settings -->
+        <div class="section">
+            <div class="section__head">
+                <div>
+                    <div class="section__title">Assistant settings</div>
+                    <div class="section__desc">
+                        Required fields used to initialize the call assistant.
+                    </div>
+                </div>
+
+                <button mat-button type="button" class="btn-subtle" (click)="resetAssistant()">
+                    reset
+                </button>
+            </div>
+
+            <form class="grid" [formGroup]="assistantForm">
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>AI Assistant Name</mat-label>
+                    <mat-icon matPrefix>person</mat-icon>
+                    <input matInput formControlName="assistantName" placeholder="Anna AI" />
+                    <mat-error
+                        *ngIf="
+                            assistantForm.controls.assistantName.touched &&
+                            assistantForm.controls.assistantName.invalid
+                        "
+                    >
+                        Assistant name is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="field field--full">
+                    <mat-label>Message Spoken by the Assistant</mat-label>
+                    <mat-icon matPrefix>record_voice_over</mat-icon>
+                    <textarea
+                        matInput
+                        rows="4"
+                        formControlName="assistantMessage"
+                        placeholder="Hello, this is the hotel AI assistant..."
+                    ></textarea>
+                    <mat-error
+                        *ngIf="
+                            assistantForm.controls.assistantMessage.touched &&
+                            assistantForm.controls.assistantMessage.invalid
+                        "
+                    >
+                        Message is required
+                    </mat-error>
+                </mat-form-field>
+            </form>
+        </div>
+
+        <!-- Demo recipient -->
+        <div class="section section--demo">
+            <div class="section__head">
+                <div>
+                    <div class="section__title">
+                        Demo recipient
+                        <span class="pill">demo</span>
+                    </div>
+                    <div class="section__desc">
+                        Temporary demo input. Final version will be a drag & drop Excel upload
+                        generating a call list.
+                    </div>
+                </div>
+
+                <button mat-button type="button" class="btn-subtle" (click)="resetDemo()">
+                    reset
+                </button>
+            </div>
+
+            <form class="grid" [formGroup]="demoForm">
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>Target Phone Number</mat-label>
+                    <mat-icon matPrefix>phone</mat-icon>
+                    <input matInput formControlName="targetPhoneNumber" placeholder="+48..." />
+                    <mat-error
+                        *ngIf="
+                            demoForm.controls.targetPhoneNumber.touched &&
+                            demoForm.controls.targetPhoneNumber.invalid
+                        "
+                    >
+                        Phone number is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>Phone Owner Name</mat-label>
+                    <mat-icon matPrefix>badge</mat-icon>
+                    <input matInput formControlName="phoneOwnerName" placeholder="Burdarov" />
+                    <mat-error
+                        *ngIf="
+                            demoForm.controls.phoneOwnerName.touched &&
+                            demoForm.controls.phoneOwnerName.invalid
+                        "
+                    >
+                        Name is required
+                    </mat-error>
+                </mat-form-field>
+            </form>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button
+            mat-flat-button
+            color="primary"
+            type="button"
+            [disabled]="assistantForm.invalid || demoForm.invalid"
+            (click)="startAiCall()"
+        >
+            Start AI Call
+        </button>
+    </div>
+</mat-card>
