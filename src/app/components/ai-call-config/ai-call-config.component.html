@@ -59,6 +59,23 @@
                         Message is required
                     </mat-error>
                 </mat-form-field>
+
+                <div class="field field--full assistant-action">
+                    <button
+                        mat-flat-button
+                        color="primary"
+                        class="create-assistant-btn"
+                        type="button"
+                        [disabled]="assistantForm.invalid || isCreatingAssistant"
+                        (click)="createAssistant()"
+                    >
+                        {{ isCreatingAssistant ? 'Creating...' : 'Create Assistant' }}
+                    </button>
+
+                    <div class="submit-error" *ngIf="assistantError">
+                        {{ assistantError }}
+                    </div>
+                </div>
             </form>
         </div>
 
@@ -118,10 +135,14 @@
             mat-flat-button
             color="primary"
             type="button"
-            [disabled]="assistantForm.invalid || demoForm.invalid"
+            [disabled]="assistantForm.invalid || demoForm.invalid || isStartingCall"
             (click)="startAiCall()"
         >
-            Start AI Call
+            {{ isStartingCall ? 'Starting call...' : 'Start AI Call' }}
         </button>
+
+        <div class="submit-error" *ngIf="callError">
+            {{ callError }}
+        </div>
     </div>
 </mat-card>

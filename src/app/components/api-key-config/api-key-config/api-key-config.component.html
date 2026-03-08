@@ -1,0 +1,51 @@
+<mat-card class="card">
+    <div class="header">
+        <div class="header__icon">
+            <mat-icon>key</mat-icon>
+        </div>
+
+        <div class="header__text">
+            <div class="header__title">ElevenLabs API Key</div>
+            <div class="header__subtitle">
+                Local demo only. The key is stored only for the current browser session.
+            </div>
+        </div>
+    </div>
+
+    <form class="content" [formGroup]="form">
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>API Key</mat-label>
+            <mat-icon matPrefix>vpn_key</mat-icon>
+
+            <input
+                matInput
+                [type]="hideKey ? 'password' : 'text'"
+                formControlName="apiKey"
+                placeholder="Enter your ElevenLabs API key"
+            />
+
+            <button mat-icon-button matSuffix type="button" (click)="hideKey = !hideKey">
+                <mat-icon>
+                    {{ hideKey ? 'visibility_off' : 'visibility' }}
+                </mat-icon>
+            </button>
+
+            <mat-error *ngIf="form.controls.apiKey.touched && form.controls.apiKey.invalid">
+                API key is required
+            </mat-error>
+        </mat-form-field>
+
+        <div class="actions">
+            <button mat-button type="button" class="btn-subtle" (click)="clearKey()">Clear</button>
+
+            <button mat-flat-button color="primary" type="button" (click)="saveKey()">
+                Save key
+            </button>
+        </div>
+
+        <div class="status" *ngIf="hasSavedKey()">
+            <mat-icon>check_circle</mat-icon>
+            <span>API key stored for current session</span>
+        </div>
+    </form>
+</mat-card>

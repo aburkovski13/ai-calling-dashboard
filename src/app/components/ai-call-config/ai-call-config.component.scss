@@ -155,3 +155,31 @@
 .btn-subtle:hover {
     opacity: 0.9;
 }
+
+.create-assistant-btn {
+    width: 100%;
+    height: 48px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.assistant-action {
+    margin-top: 16px;
+}
+
+.create-assistant-btn {
+    width: 100%;
+    height: 48px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.submit-error {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(220, 38, 38, 0.08);
+    border: 1px solid rgba(220, 38, 38, 0.18);
+    color: #b91c1c;
+    font-size: 13px;
+}

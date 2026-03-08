@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { HotelProfileComponent } from '../components/hotel-profile/hotel-profile.component';
-import { AiCallConfigComponent } from '../components/ai-call-config/ai-call-config.component';
-import { PhoneNumberIntegrationComponent } from '../components/phone-number-integration/phone-number-integration.component';
 import { MatIconModule } from '@angular/material/icon';
+import { HotelProfileComponent } from './components/hotel-profile/hotel-profile.component';
+import { PhoneNumberIntegrationComponent } from './components/phone-number-integration/phone-number-integration.component';
+import { AiCallConfigComponent } from './components/ai-call-config/ai-call-config.component';
+import { ApiKeyConfigComponent } from './components/api-key-config/api-key-config/api-key-config.component';
 
 @Component({
     selector: 'app-root',
@@ -14,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
         HotelProfileComponent,
         PhoneNumberIntegrationComponent,
         AiCallConfigComponent,
+        ApiKeyConfigComponent,
         MatIconModule,
     ],
     templateUrl: './app.component.html',
@@ -34,7 +36,7 @@ export class AppComponent {
         this.step = 2;
     }
 
-    onPhoneNumberIntegrationCompleted(): void {
+    onTelephonyCompleted(): void {
         this.step = 3;
     }
 
@@ -52,5 +54,9 @@ export class AppComponent {
 
     isActive(n: number): boolean {
         return this.step === n;
+    }
+
+    isLocked(n: number): boolean {
+        return this.step < n;
     }
 }

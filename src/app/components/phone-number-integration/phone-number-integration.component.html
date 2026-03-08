@@ -1,0 +1,115 @@
+<mat-card class="card">
+    <div class="header">
+        <div class="title">
+            <mat-icon class="title__icon">call</mat-icon>
+            <div>
+                <div class="title__text">Phone number Integration (SIP)</div>
+                <div class="title__sub">
+                    Set up the connection so that AI bot can call from your number.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form class="grid" [formGroup]="form">
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>Phone number</mat-label>
+            <mat-icon matPrefix>phone</mat-icon>
+            <input matInput formControlName="phoneNumber" placeholder="+48..." />
+            <mat-error
+                *ngIf="form.controls.phoneNumber.touched && form.controls.phoneNumber.invalid"
+            >
+                A phone number is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field">
+            <mat-label>AI bot name</mat-label>
+            <mat-icon matPrefix>badge</mat-icon>
+            <input matInput formControlName="displayName" placeholder="Phone label" />
+            <mat-error
+                *ngIf="form.controls.displayName.touched && form.controls.displayName.invalid"
+            >
+                Name is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field field--full">
+            <mat-label>SIP trunk address</mat-label>
+            <mat-icon matPrefix>dns</mat-icon>
+            <input
+                matInput
+                formControlName="sipTrunkAddress"
+                placeholder="sip:your-trunk.provider.com"
+            />
+            <mat-error
+                *ngIf="
+                    form.controls.sipTrunkAddress.touched && form.controls.sipTrunkAddress.invalid
+                "
+            >
+                A SIP trunk address is required.
+            </mat-error>
+        </mat-form-field>
+
+        <div class="sub-section">
+            <div class="sub-section-header">SIP Credentials</div>
+
+            <div>
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>Username</mat-label>
+                    <mat-icon matPrefix>person</mat-icon>
+                    <input matInput formControlName="sipUsername" required />
+                    <mat-error *ngIf="form.controls['sipUsername'].invalid">
+                        Username is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>Password</mat-label>
+                    <mat-icon matPrefix>vpn_key</mat-icon>
+                    <input
+                        matInput
+                        [type]="hidePassword ? 'password' : 'text'"
+                        formControlName="sipPassword"
+                        required
+                    />
+                    <button
+                        mat-icon-button
+                        matSuffix
+                        matTooltip="Show password"
+                        type="button"
+                        (click)="hidePassword = !hidePassword"
+                    >
+                        <mat-icon>
+                            {{ hidePassword ? 'visibility_off' : 'visibility' }}
+                        </mat-icon>
+                    </button>
+
+                    <mat-error *ngIf="form.controls['sipPassword'].invalid">
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+
+    <div class="submit-error" *ngIf="submitError">
+        {{ submitError }}
+    </div>
+
+    <div class="actions">
+        <button mat-stroked-button type="button" (click)="resetForm()" [disabled]="isSubmitting">
+            Reset
+        </button>
+
+        <button
+            mat-flat-button
+            color="primary"
+            type="button"
+            [disabled]="form.invalid || isSubmitting"
+            (click)="submitTelephony()"
+        >
+            {{ isSubmitting ? 'Saving...' : 'Save integration' }}
+        </button>
+    </div>
+</mat-card>
