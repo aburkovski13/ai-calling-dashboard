@@ -12,7 +12,7 @@
         "lint:fix": "ng lint --fix",
         "format": "prettier --write \"src/**/*.{ts,html,scss,json}\"",
         "build:gh": "ng build --configuration production --base-href /ai-calling-dashboard/",
-        "deploy:gh": "gh-pages -d dist/eleven-dashboard-demo"
+        "deploy:gh": "gh-pages -d dist/eleven-dashboard-demo/browser"
     },
     "private": true,
     "dependencies": {

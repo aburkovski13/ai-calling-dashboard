@@ -1,5 +1,9 @@
 <div class="page">
     <div class="container">
+        <app-api-key-config></app-api-key-config>
+
+        <div class="top-spacer"></div>
+
         <div class="wizard">
             <!-- STEP 1 -->
             <div class="step">
@@ -21,13 +25,7 @@
                             <div class="step-sub">Basic hotel details</div>
                         </div>
 
-                        <button
-                            class="edit"
-                            type="button"
-                            *ngIf="isDone(1)"
-                            (click)="editStep(1)"
-                            aria-label="Edit step 1"
-                        >
+                        <button class="edit" type="button" *ngIf="isDone(1)" (click)="editStep(1)">
                             edit
                         </button>
                     </div>
@@ -39,7 +37,7 @@
             </div>
 
             <!-- STEP 2 -->
-            <div class="step" *ngIf="step >= 2" @reveal>
+            <div class="step" [@reveal]>
                 <div class="rail">
                     <div
                         class="dot"
@@ -51,34 +49,36 @@
                     <div class="line"></div>
                 </div>
 
-                <div class="panel" [class.panel--done]="isDone(2)">
+                <div
+                    class="panel"
+                    [class.panel--done]="isDone(2)"
+                    [class.panel--locked]="isLocked(2)"
+                >
                     <div class="step-head">
                         <div>
-                            <div class="step-title">Telephony integration</div>
-                            <div class="step-sub">Twilio & SIP settings</div>
+                            <div class="step-title">Phone integration</div>
+                            <div class="step-sub">SIP settings</div>
+                            <div class="step-locked-note" *ngIf="isLocked(2)">
+                                <mat-icon>lock</mat-icon>
+                                <span>Complete previous step to unlock</span>
+                            </div>
                         </div>
 
-                        <button
-                            class="edit"
-                            type="button"
-                            *ngIf="isDone(2)"
-                            (click)="editStep(2)"
-                            aria-label="Edit step 2"
-                        >
+                        <button class="edit" type="button" *ngIf="isDone(2)" (click)="editStep(2)">
                             edit
                         </button>
                     </div>
 
-                    <div class="step-body" [class.step-body--disabled]="isDone(2)">
-                        <app-telephony-integration
-                            (completed)="onPhoneNumberIntegrationCompleted()"
-                        ></app-telephony-integration>
+                    <div class="step-body" [class.step-body--disabled]="isDone(2) || isLocked(2)">
+                        <app-phone-integration
+                            (completed)="onTelephonyCompleted()"
+                        ></app-phone-integration>
                     </div>
                 </div>
             </div>
 
             <!-- STEP 3 -->
-            <div class="step step--last" *ngIf="step >= 3" @reveal>
+            <div class="step step--last" [@reveal]>
                 <div class="rail">
                     <div
                         class="dot"
@@ -89,47 +89,47 @@
                     </div>
                 </div>
 
-                <div class="panel" [class.panel--done]="isDone(3)">
+                <div
+                    class="panel"
+                    [class.panel--done]="isDone(3)"
+                    [class.panel--locked]="isLocked(3)"
+                >
                     <div class="step-head">
                         <div>
                             <div class="step-title">AI call configuration</div>
                             <div class="step-sub">Assistant message + demo recipient</div>
+                            <div class="step-locked-note" *ngIf="isLocked(3)">
+                                <mat-icon>lock</mat-icon>
+                                <span>Complete previous step to unlock</span>
+                            </div>
                         </div>
 
-                        <button
-                            class="edit"
-                            type="button"
-                            *ngIf="isDone(3)"
-                            (click)="editStep(3)"
-                            aria-label="Edit step 3"
-                        >
+                        <button class="edit" type="button" *ngIf="isDone(3)" (click)="editStep(3)">
                             edit
                         </button>
                     </div>
 
-                    <div class="step-body" [class.step-body--disabled]="isDone(3)">
+                    <div class="step-body" [class.step-body--disabled]="isDone(3) || isLocked(3)">
                         <app-ai-call-config (completed)="onAiCompleted()"></app-ai-call-config>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- FINAL STEP -->
-    <div class="step step--last" *ngIf="step >= 4" @reveal>
-        <div class="rail">
-            <div class="dot dot--done">✓</div>
-        </div>
+            <!-- FINAL STEP -->
+            <div class="step step--last" *ngIf="step >= 4" @reveal>
+                <div class="rail">
+                    <div class="dot dot--done">✓</div>
+                </div>
 
-        <div class="panel panel--success">
-            <div class="success">
-                <mat-icon class="success__icon">call</mat-icon>
-
-                <div class="success__title">AI Call Started</div>
-
-                <div class="success__text">
-                    The assistant has started calling the recipient. You can monitor the progress in
-                    the system logs.
+                <div class="panel panel--success">
+                    <div class="success">
+                        <mat-icon class="success__icon">call</mat-icon>
+                        <div class="success__title">AI Call Started</div>
+                        <div class="success__text">
+                            The assistant has started calling the recipient. You can monitor the
+                            progress in the system logs.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
