@@ -72,7 +72,7 @@ export class PhoneNumberIntegrationComponent {
                     console.error('createPhoneNumber error:', error);
 
                     this.submitError =
-                        error?.error?.detail?.message ||
+                        error?.error?.detail.message ||
                         'Failed to create phone number integration.';
                 },
             });
