@@ -71,7 +71,7 @@ export class ElevenLabsApiService {
 
     createBatchCall(payload: CreateBatchCallPayload): Observable<unknown> {
         return this.http.post(
-            `${this.baseUrl}/convai/batch-calls`,
+            `${this.baseUrl}/convai/batch-calling/submit`,
             {
                 call_name: payload.callName,
                 agent_id: payload.agentId,
